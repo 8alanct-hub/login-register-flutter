@@ -53,8 +53,37 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
 //Aqui va la funcion del paso 4
 void registra(){
+  //1 
   final formOk = _formKey.currentState!.validate();
-  if (!formOk)
+  if (!formOk) return;
+
+  //2 valida lo que no es un TextFormField
+  if (ciudad == null){
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Elige una ciudad')),
+      );
+      return; 
+  }
+  if (!aceptaTerminos) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Debes aceptar los términos')),
+      );
+      return;
+  }
+
+  // 3 Arma el usuario con todos Los Datos
+  final nuevo = Usuario(
+    nombre: nombre, 
+    apellido: apellido, 
+    edad: edad, 
+    genero: genero, 
+    ciudad: ciudad, 
+    sobreMi: sobreMi, 
+    usuario: usuario, 
+    constrasena: constrasena
+    )
+
+
 }
 
 }
